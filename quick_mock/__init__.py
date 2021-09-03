@@ -60,7 +60,7 @@ def main():
         if argv[0] == 'create':
             if argv[1] == 'project':
                 os.mkdir(os.path.join(work_dir, argv[2]))
-                create_template(os.path.join(work_dir, 'sample.py'))
+                create_template(os.path.join(work_dir, argv[2], 'sample.py'))
             elif argv[1] == 'interface':
                 create_template(os.path.join(work_dir, f'{argv[2]}.py'))
             return
