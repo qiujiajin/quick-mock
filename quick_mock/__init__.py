@@ -77,9 +77,10 @@ def create_template(filepath):
     else:
         s = '''\
 """
+# -*- coding: utf-8 -*-
 request has attrs: args、method、json ...
 define a dict called expose:
-    expose must have url、response
+    expose must have url and response
     expose response can be a dictionary or a callable object
 """
 from quick_mock import request
@@ -91,7 +92,7 @@ expose = {
         'status': 200
     }
 }'''
-        with open(os.path.join(filepath), 'w', encoding='utf8') as f:
+        with open(os.path.join(filepath), 'wb') as f:
             f.write(s)
 
 

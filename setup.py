@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='quick-mock',
-    version='0.0.2',
+    version='0.0.4',
     author='Hugh',
     author_email='609799548@qq.com',
     description='quick mock server',
@@ -26,6 +26,6 @@ setup(
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'flask==1.0.0'
+        'flask==1.1.0'
     ]
 )
