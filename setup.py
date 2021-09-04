@@ -1,13 +1,13 @@
 import setuptools
 from distutils.core import setup
 
-with open('README.md', 'r', encoding='utf-8') as fh:
+with open('README.md', 'r') as fh:
     long_description = fh.read()
 
 setup(
     name='quick-mock',
-    version='0.0.1',
-    author='丘家劲',
+    version='0.0.2',
+    author='Hugh',
     author_email='609799548@qq.com',
     description='quick mock server',
     long_description=long_description,
@@ -21,11 +21,11 @@ setup(
     },
     packages=setuptools.find_packages(),
     classifiers=[
-        "Programming Language :: Python :: 3",
+        "Programming Language :: Python" ,
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
     install_requires=[
-        'flask==2.0.1'
+        'flask==1.0.0'
     ]
 )

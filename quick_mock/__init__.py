@@ -21,7 +21,7 @@ def get_dict_value(dic, key):
     try:
         return dic[key]
     except KeyError:
-        raise ValueError(f'expose must has {key}!')
+        raise ValueError('expose must has %s!' % key)
 
 
 def mock_func(route, filename):
@@ -30,16 +30,16 @@ def mock_func(route, filename):
     response = get_dict_value(route, RESPONSE)
     view_func = response if callable(response) else lambda: response
     methods = method if isinstance(method, (list, tuple)) else [method]
-    app.add_url_rule(url, view_func=view_func, methods=methods, endpoint=f'{filename}.{view_func.__name__}')
+    app.add_url_rule(url, view_func=view_func, methods=methods, endpoint='%s.%s' % (filename, view_func.__name__))
 
 
-def run(work_dir):
+def run(work_dir, port=5000):
     for filename in os.listdir(work_dir):
         if filename.endswith('.py'):
             m = importlib.import_module(filename[:-3])
             mock_func(getattr(m, 'expose'), filename)
     collection_routes()
-    app.run(host='0.0.0.0')
+    app.run(host='0.0.0.0', port=int(port))
 
 
 def collection_routes():
@@ -50,7 +50,7 @@ def collection_routes():
 
 
 def main():
-    msg = 'Usage: mock create project/interface <name>'
+    msg = 'Usage: mock create project/interface <name>\nmock run port 5000'
     argv = sys.argv[1:]
     work_dir = os.getcwd()
     sys.path.insert(0, work_dir)
@@ -62,14 +62,18 @@ def main():
                 os.mkdir(os.path.join(work_dir, argv[2]))
                 create_template(os.path.join(work_dir, argv[2], 'sample.py'))
             elif argv[1] == 'interface':
-                create_template(os.path.join(work_dir, f'{argv[2]}.py'))
-            return
+                create_template(os.path.join(work_dir, '%s.py' % argv[2]))
+        elif argv[0] == 'run':
+            if argv[1] == 'port':
+                port = argv[2]
+                run(work_dir, port)
+        return
     print(msg)
 
 
 def create_template(filepath):
     if os.path.exists(filepath):
-        print(f'{filepath} existing.')
+        print('%s existing.' % filepath)
     else:
         s = '''\
 """
