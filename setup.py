@@ -6,7 +6,7 @@ with open('README.md', 'r') as fh:
 
 setup(
     name='quick-mock',
-    version='0.0.4',
+    version='0.0.5',
     author='Hugh',
     author_email='609799548@qq.com',
     description='quick mock server',

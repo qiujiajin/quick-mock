@@ -78,7 +78,7 @@ def create_template(filepath):
         s = '''\
 """
 # -*- coding: utf-8 -*-
-request has attrs: args、method、json ...
+request has attrs: args, method, form, json ...
 define a dict called expose:
     expose must have url and response
     expose response can be a dictionary or a callable object
@@ -91,8 +91,11 @@ expose = {
     'response': {
         'status': 200
     }
-}'''
+}'''    
+        v = sys.version_info.major
         with open(os.path.join(filepath), 'wb') as f:
+            if v > 2:
+                s = s.encode()
             f.write(s)
 
 
